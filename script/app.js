@@ -1,5 +1,4 @@
-import axios from "axios"
-
+import axios from "axios";
 
 const params = {
     model: "text-davinci-003",
@@ -10,9 +9,9 @@ const params = {
 
 const postText = () => {
     axios
-        .post('https://api.openai.com/v1/models', params, {
+        .post('https://api.openai.com/v1/completions', params, {
             headers: {
-                'Authorization': 'Bearer ' + import.meta.env.OPENAI_API_KEY
+                'Authorization': 'Bearer ' + import.meta.env.VITE_OPENAI_API_KEY
                 }
         })
     .then(response => console.log(response))
