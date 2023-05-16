@@ -1,21 +1,22 @@
-import axios from "axios";
-
 const params = {
-    model: "text-davinci-003",
-    prompt: "Say this is a test",
-    max_tokens: 7,
-    temperature: 0,
+    model: 'gpt-3.5-turbo',
+    messages: [{role: 'user', content: 'Hello there!'}],
 }
 
 const postText = () => {
-    axios
-        .post('https://api.openai.com/v1/completions', params, {
-            headers: {
-                'Authorization': 'Bearer ' + import.meta.env.VITE_OPENAI_API_KEY
-                }
-        })
-    .then(response => console.log(response))
-    .catch(error => console.log(error))
+    fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        mode: 'cors',
+        headers: new Headers({
+            'Authorization': 'Bearer ' + import.meta.env.VITE_OPENAI_API_KEY,
+            'OpenAI-Organization': import.meta.env.VITE_OPEN_AI_ORG,
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(params)
+    })
+    .then(response => {
+        console.log(response)
+    })
 }
 
 postText()
